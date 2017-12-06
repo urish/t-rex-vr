@@ -7,6 +7,7 @@ const cactusKinds = 7;
 
 const distance = 30;
 const cactusCount = 12;
+const jumpAccelerationTreshold = 20;
 
 function addCacti() {
   for (i = 0; i < cactusCount; i++) {
@@ -34,6 +35,7 @@ function addCacti() {
 
 function animateJump() {
   trex.removeChild(wobbleAnimation);
+  trex.setAttribute('rotation', {x: 0, y: 0, z: 0});
   return new Promise(resolve => {
     const cactusAnimation = document.querySelector('#jumpAnimation');
     const animationFragment = document.importNode(cactusAnimation.content, true);
@@ -49,17 +51,24 @@ let jumping = false;
 function jump() {
   if (!jumping) {
     jumping = true;
-    jump()
+    animateJump()
       .then(() => jumping = false);      
   }
 }
 
 document.addEventListener('keydown', (e) => {
   if (e.key === ' ') {
-    animateJump();
+    jump();
   }
 });
 
-remote.addEventListener('buttondown', animateJump);
+window.addEventListener('devicemotion', (e) => {
+  const accel = e.accelerationIncludingGravity;
+  if (accel && accel.x > jumpAccelerationTreshold) {
+    jump();
+  }
+}, true);
+
+remote.addEventListener('buttondown', jump);
 
 addCacti();
