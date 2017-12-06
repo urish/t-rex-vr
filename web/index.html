@@ -27,11 +27,12 @@
     </a-entity>
 
     <a-gradient-sky material="shader: gradient; topColor: 163 233 248; bottomColor: 230 191 140;"></a-gradient-sky>
+    <a-entity id="remote" tracked-controls="idPrefix: Daydream Controller" daydream-controls></a-entity>
   </a-scene>
-  <template id="cactusAnimation">
-    <a-animation
-      attribute="position" dur="2000" direction="forward"
-      to="-20 2 -10" easing="linear"></a-animation>
+  <template id="jumpAnimation">
+    <a-animation 
+      attribute="position" dur="500" direction="alternate"
+      to="0 14 -30" easing="linear" repeat="1"></a-animation>
   </template>
   <script src="t-rex.js"></script>
 </body>
