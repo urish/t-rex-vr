@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>T-Rex VR</title>
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-svgfile-component@1.1.2/dist/aframe-svgfile-component.js"></script>
     <script src="https://cdn.rawgit.com/zcanter/aframe-gradient-sky/master/dist/gradientsky.min.js"></script>
   </head>
 <body>
@@ -16,7 +15,8 @@
     </a-assets>
     <a-cylinder position="0 0 0" radius="40" height="0.1" material="src:#imgGround; repeat: 20 20"></a-cylinder>
     <a-entity>
-      <a-entity id="t-rex" svgfile="svgFile: assets/trex.svg; height:9.6; color: black" position="0 4.8 -30">
+      <a-entity id="t-rex" obj-model="obj: assets/trex.obj" position="0 0 -30" scale="10 10 10"
+        material="color: black">
         <a-animation id="t-rex-wobble"
           attribute="rotation" dur="200" direction="alternate"
           to="0 10 -10" repeat="indefinite"></a-animation>
@@ -31,7 +31,7 @@
   </a-scene>
   <template id="jumpAnimation">
     <a-animation 
-      attribute="position" dur="200" from="0 18 -30" to="0 4.5 -30" easing="linear"
+      attribute="position" dur="200" from="0 18 -30" to="0 0 -30" easing="linear"
       delay="1000"></a-animation>
     <a-animation 
       attribute="position" dur="200" to="0 18 -30" easing="linear"></a-animation>
