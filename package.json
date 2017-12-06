@@ -6,9 +6,11 @@
   "author": "Uri Shaked <uri@salsa4fun.co.il>",
   "license": "MIT",
   "scripts": {
+    "start": "live-server web",
     "deploy": "firebase deploy --only hosting"
   },
   "devDependencies": {
-    "firebase-tools": "^3.16.0"
+    "firebase-tools": "^3.16.0",
+    "live-server": "^1.2.0"
   }
 }
