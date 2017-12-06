@@ -13,9 +13,9 @@
     <a-assets>
       <img id="imgGround" src="https://ucarecdn.com/d86697ef-c9b9-4b74-912b-6e332adc80cd/"/>
     </a-assets>
-    <a-cylinder position="0 0 0" radius="40" height="0.1" material="src:#imgGround; repeat: 20 20"></a-cylinder>
+    <a-cylinder position="0 0 0" radius="50" height="0.1" material="src:#imgGround; repeat: 20 20"></a-cylinder>
     <a-entity>
-      <a-entity id="t-rex" obj-model="obj: assets/trex.obj" position="0 0 -30" scale="10 10 10"
+      <a-entity id="t-rex" obj-model="obj: assets/trex.obj" position="0 0 -40" scale="10 10 10"
         material="color: black">
         <a-animation id="t-rex-wobble"
           attribute="rotation" dur="200" direction="alternate"
@@ -31,10 +31,10 @@
   </a-scene>
   <template id="jumpAnimation">
     <a-animation 
-      attribute="position" dur="200" from="0 18 -30" to="0 0 -30" easing="linear"
+      attribute="position" dur="200" from="0 18 -40" to="0 0 -40" easing="linear"
       delay="1000"></a-animation>
     <a-animation 
-      attribute="position" dur="200" to="0 18 -30" easing="linear"></a-animation>
+      attribute="position" dur="200" to="0 18 -40" easing="linear"></a-animation>
   </template>
   <script src="t-rex.js"></script>
 </body>

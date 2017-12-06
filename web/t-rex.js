@@ -5,14 +5,17 @@ const wobbleAnimation = document.querySelector('#t-rex-wobble');
 
 const cactusKinds = 7;
 
-const distance = 30;
+const distance = 40;
 const cactusCount = 12;
 const jumpAccelerationTreshold = 20;
 
 function addCacti() {
   for (i = 0; i < cactusCount; i++) {
     let entity = document.createElement('a-entity');
-    const angle = 360. / cactusCount * i;
+    let angle = 360. / cactusCount * i;
+    if (Math.random() > 0.5) {
+      angle -= 360. / cactusCount + 8;
+    }
     const cactusId = Math.ceil(cactusKinds * Math.random());
     entity.setAttribute('obj-model', {
       obj: `assets/cactus-${cactusId}.obj`
