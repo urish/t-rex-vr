@@ -1,0 +1,14 @@
+{
+  "name": "trex-vr",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:urish/t-rex-vr.git",
+  "author": "Uri Shaked <uri@salsa4fun.co.il>",
+  "license": "MIT",
+  "scripts": {
+    "deploy": "firebase deploy --only hosting"
+  },
+  "devDependencies": {
+    "firebase-tools": "^3.16.0"
+  }
+}
