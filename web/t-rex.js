@@ -1,10 +1,10 @@
 const scene = document.querySelector('#scene');
 
 const cactusKinds = [
-  {svgFile: '../assets/cactus-1.svg', height: 9.14},
-  {svgFile: '../assets/cactus-2.svg', height: 9.14},
-  {svgFile: '../assets/cactus-5.svg', height: 8.95},
-  {svgFile: '../assets/cactus-6.svg', height: 5.55},
+  {svgFile: 'assets/cactus-1.svg', height: 9.14},
+  {svgFile: 'assets/cactus-2.svg', height: 9.14},
+  {svgFile: 'assets/cactus-5.svg', height: 8.95},
+  {svgFile: 'assets/cactus-6.svg', height: 5.55},
 ];
 
 const distance = 30;
@@ -28,7 +28,7 @@ function addCacti() {
       y: angle + 90,
       z: 0,
     });
-    scene.appendChild(entity);  
+    scene.appendChild(entity);
   }
 }
 

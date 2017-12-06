@@ -6,25 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>T-Rex VR</title>
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-svgfile-component@1.1.2/dist/aframe-svgfile-component.js"></script> 
+    <script src="https://unpkg.com/aframe-svgfile-component@1.1.2/dist/aframe-svgfile-component.js"></script>
+    <script src="https://cdn.rawgit.com/zcanter/aframe-gradient-sky/master/dist/gradientsky.min.js"></script>
   </head>
 <body>
   <a-scene id="scene">
-    <a-cylinder position="0 0 0" radius="40" height="0.1" color="#FFC65D"></a-cylinder>
+    <a-assets>
+      <img id="imgGround" src="https://ucarecdn.com/d86697ef-c9b9-4b74-912b-6e332adc80cd/"/>
+    </a-assets>
+    <a-cylinder position="0 0 0" radius="40" height="0.1" material="src:#imgGround; repeat: 20 20"></a-cylinder>
     <a-entity>
-      <a-entity svgfile="svgFile: ../assets/trex.svg; height:9.6; color: #535353" position="0 4.8 -30">
-        <a-animation 
+      <a-entity id="t-rex" svgfile="svgFile: assets/trex.svg; height:9.6; color: black" position="0 4.8 -30">
+        <a-animation
           attribute="rotation" dur="200" direction="alternate"
           to="0 10 -10" repeat="indefinite"></a-animation>
       </a-entity>
-      <a-animation 
+      <a-animation
         attribute="rotation" dur="20000" direction="forward"
         to="0 -360 0" repeat="indefinite"  easing="linear"></a-animation>
     </a-entity>
-    <a-sky color="#ECECEC"></a-sky>
+
+    <a-gradient-sky material="shader: gradient; topColor: 163 233 248; bottomColor: 230 191 140;"></a-gradient-sky>
   </a-scene>
   <template id="cactusAnimation">
-    <a-animation 
+    <a-animation
       attribute="position" dur="2000" direction="forward"
       to="-20 2 -10" easing="linear"></a-animation>
   </template>
