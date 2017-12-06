@@ -1,6 +1,7 @@
 const scene = document.querySelector('#scene');
 const trex = document.querySelector('#t-rex');
 const remote = document.querySelector('#remote');
+const wobbleAnimation = document.querySelector('#t-rex-wobble');
 
 const cactusKinds = [
   {svgFile: 'assets/cactus-1.svg', height: 9.14},
@@ -34,11 +35,13 @@ function addCacti() {
   }
 }
 
-function jump() {
+function animateJump() {
+  trex.removeChild(wobbleAnimation);
   return new Promise(resolve => {
     const cactusAnimation = document.querySelector('#jumpAnimation');
     const animationFragment = document.importNode(cactusAnimation.content, true);
     animationFragment.firstElementChild.addEventListener('animationend', () => {
+      trex.appendChild(wobbleAnimation);
       resolve();
     });
     trex.appendChild(animationFragment);
@@ -46,16 +49,20 @@ function jump() {
 }
 
 let jumping = false;
+function jump() {
+  if (!jumping) {
+    jumping = true;
+    jump()
+      .then(() => jumping = false);      
+  }
+}
+
 document.addEventListener('keydown', (e) => {
   if (e.key === ' ') {
-    if (!jumping) {
-      jumping = true;
-      jump()
-        .then(() => jumping = false);      
-    }
+    animateJump();
   }
 });
 
-remote.addEventListener('buttondown', jump);
+remote.addEventListener('buttondown', animateJump);
 
 addCacti();

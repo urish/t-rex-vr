@@ -17,7 +17,7 @@
     <a-cylinder position="0 0 0" radius="40" height="0.1" material="src:#imgGround; repeat: 20 20"></a-cylinder>
     <a-entity>
       <a-entity id="t-rex" svgfile="svgFile: assets/trex.svg; height:9.6; color: black" position="0 4.8 -30">
-        <a-animation
+        <a-animation id="t-rex-wobble"
           attribute="rotation" dur="200" direction="alternate"
           to="0 10 -10" repeat="indefinite"></a-animation>
       </a-entity>
@@ -31,8 +31,10 @@
   </a-scene>
   <template id="jumpAnimation">
     <a-animation 
-      attribute="position" dur="500" direction="alternate"
-      to="0 14 -30" easing="linear" repeat="1"></a-animation>
+      attribute="position" dur="200" from="0 18 -30" to="0 4.5 -30" easing="linear"
+      delay="1000"></a-animation>
+    <a-animation 
+      attribute="position" dur="200" to="0 18 -30" easing="linear"></a-animation>
   </template>
   <script src="t-rex.js"></script>
 </body>
