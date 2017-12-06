@@ -10,10 +10,16 @@
   </head>
 <body>
   <a-scene id="scene">
-    <a-entity svgfile="svgFile: ../assets/trex.svg; height:9.6; color: #535353" position="0 2 -10">
+    <a-cylinder position="0 0 0" radius="40" height="0.1" color="#FFC65D"></a-cylinder>
+    <a-entity>
+      <a-entity svgfile="svgFile: ../assets/trex.svg; height:9.6; color: #535353" position="0 4.8 -30">
+        <a-animation 
+          attribute="rotation" dur="200" direction="alternate"
+          to="0 10 -10" repeat="indefinite"></a-animation>
+      </a-entity>
       <a-animation 
-        attribute="position" dur="2000" direction="alternate"
-        to="0 10 -10" repeat="indefinite"></a-animation>
+        attribute="rotation" dur="20000" direction="forward"
+        to="0 -360 0" repeat="indefinite"  easing="linear"></a-animation>
     </a-entity>
     <a-sky color="#ECECEC"></a-sky>
   </a-scene>
