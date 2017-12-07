@@ -10,10 +10,9 @@ For best experience, use a VR headset. You make the T-Rex jump by jumping (yes, 
 
 ## TODO
 
-[ ] Collision Detection
-[ ] Scores + High Score
-[ ] Ducking
-[ ] Pterodactiles 
-[ ] Night mode
-[ ] Clouds in the background
-
+- [ ] Collision detection
+- [ ] Scores + High Score
+- [ ] Ducking
+- [ ] Pterodactiles 
+- [ ] Night mode
+- [ ] Clouds in the background
