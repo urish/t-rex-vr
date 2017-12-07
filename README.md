@@ -16,3 +16,4 @@ For best experience, use a VR headset. You make the T-Rex jump by jumping (yes, 
 - [ ] Pterodactiles 
 - [ ] Night mode
 - [ ] Clouds in the background
+- [ ] Offline Support (duh!) ([#3](https://github.com/urish/t-rex-vr/issues/3))
