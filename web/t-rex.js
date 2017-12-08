@@ -6,17 +6,31 @@ const wobbleAnimation = document.querySelector('#t-rex-wobble');
 const cactusKinds = 7;
 
 const distance = 40;
-const cactusCount = 12;
+const cactiAngles = [
+  9,
+  338,
+  288,
+  230,
+  162,
+  124,
+];
 const jumpAccelerationTreshold = 20;
 
+let times = [
+  421,
+  473,
+  557,
+  653,
+  768, 
+  833,
+  885,
+  960,
+].map(v => v / 30.0).map(v => v - 10);
+
 function addCacti() {
-  for (i = 0; i < cactusCount; i++) {
-    let entity = document.createElement('a-entity');
-    let angle = 360. / cactusCount * i;
-    if (Math.random() > 0.5) {
-      angle -= 360. / cactusCount + 8;
-    }
+  for (const angle of cactiAngles) {
     const cactusId = Math.ceil(cactusKinds * Math.random());
+    let entity = document.createElement('a-entity');
     entity.setAttribute('obj-model', {
       obj: `assets/cactus-${cactusId}.obj`
     });
@@ -74,4 +88,4 @@ window.addEventListener('devicemotion', (e) => {
 
 remote.addEventListener('buttondown', jump);
 
-addCacti();
+times.map(v => setTimeout(jump, v*1000));

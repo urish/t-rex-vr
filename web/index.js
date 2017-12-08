@@ -1,4 +1,4 @@
-if ('serviceWorker' in navigator) {
+if (0) {
   window.addEventListener('load', function() {
     console.log('loaded')
     navigator.serviceWorker.register('/sw.js').then(function(registration) {
