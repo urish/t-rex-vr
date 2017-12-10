@@ -14,11 +14,10 @@ self.addEventListener('install', function(event) {
     event.waitUntil(
       caches.open(CACHE_NAME)
         .then(function(cache) {
-          console.log('Opened cache');
           return cache.addAll(urlsToCache);
         })
         .catch(function(err){
-          console.log('Could not cache files\n', err)
+          console.error(err); // eslint-disable-line no-console
         })
     );
 });
@@ -61,7 +60,7 @@ self.addEventListener('fetch', function(event) {
         );
       })
       .catch(function(err){
-        console.log(err)
+        console.error(err); // eslint-disable-line no-console
       })
     );
 });

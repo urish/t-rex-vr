@@ -10,7 +10,7 @@ const cactusCount = 12;
 const jumpAccelerationTreshold = 20;
 
 function addCacti() {
-  for (i = 0; i < cactusCount; i++) {
+  for (let i = 0; i < cactusCount; i++) {
     let entity = document.createElement('a-entity');
     let angle = 360. / cactusCount * i;
     if (Math.random() > 0.5) {
