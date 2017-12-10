@@ -10,6 +10,3 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
-
-addCacti();
-
