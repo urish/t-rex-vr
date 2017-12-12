@@ -3,25 +3,23 @@ const trex = document.querySelector('#t-rex');
 const remote = document.querySelector('#remote');
 const wobbleAnimation = document.querySelector('#t-rex-wobble');
 
+const mode = '3dio';
+const cactusIds = ['70369520-e9bb-4895-9d7e-c32a64df3db3', 'f8b69c6b-74f0-40f9-916f-c5293f27fe10'];
 const cactusKinds = 7;
 
 const distance = 40;
 const cactusCount = 12;
 const jumpAccelerationTreshold = 20;
 
+
 function addCacti() {
+  // create cactus entitites and generate random positions and rotations
   for (i = 0; i < cactusCount; i++) {
     let entity = document.createElement('a-entity');
     let angle = 360. / cactusCount * i;
     if (Math.random() > 0.5) {
       angle -= 360. / cactusCount + 8;
     }
-    const cactusId = Math.ceil(cactusKinds * Math.random());
-    entity.setAttribute('obj-model', {
-      obj: `assets/cactus-${cactusId}.obj`
-    });
-    entity.setAttribute('scale', { x: 10, y: 10, z:10 });
-    entity.setAttribute('material', { color: 'black' });
     entity.setAttribute('position', {
       x: distance * Math.cos(angle / 180 * Math.PI),
       y: 0,
@@ -32,6 +30,21 @@ function addCacti() {
       y: angle + 90,
       z: 0,
     });
+
+    const cactusIndex = Math.ceil(cactusKinds * Math.random());
+
+    // use basic black cactus models
+    if (mode === 'basic') {
+      entity.setAttribute('obj-model', {
+        obj: `assets/cactus-${cactusIndex}.obj`
+      });
+      entity.setAttribute('scale', { x: 10, y: 10, z:10 });
+      entity.setAttribute('material', { color: 'black' });
+    } else {
+      entity.setAttribute('io3d-furniture', `id: ${cactusIds[cactusIndex % 2]}`)
+      entity.setAttribute('scale', { x: 9, y: 9, z:9 });
+    }
+    // add cactus to the scene
     scene.appendChild(entity);
   }
 }
@@ -51,6 +64,7 @@ function animateJump() {
 }
 
 let jumping = false;
+
 function jump() {
   if (!jumping) {
     jumping = true;
@@ -74,4 +88,4 @@ window.addEventListener('devicemotion', (e) => {
 
 remote.addEventListener('buttondown', jump);
 
-addCacti();
+
