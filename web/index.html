@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>T-Rex VR</title>
+    <title>Elephant VR</title>
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/zcanter/aframe-gradient-sky/master/dist/gradientsky.min.js"></script>
     <script src="https://dist.3d.io/3dio-js/1.x.x/3dio.min.js"></script>
@@ -17,11 +17,10 @@
     </a-assets>
     <a-cylinder position="0 0 0" radius="50" height="0.1" material="src:#imgGround; repeat: 20 20"></a-cylinder>
     <a-entity>
-      <a-entity id="t-rex" obj-model="obj: assets/trex.obj" position="0 0 -40" scale="10 10 10"
-        material="color: black">
+      <a-entity id="elephant" io3d-furniture="id: 0b5f9e5e-0ac4-40b1-92f3-07ef52d17f33" position="0 0 -40" rotation="0 85 0" scale="12 12 12">
         <a-animation id="t-rex-wobble"
           attribute="rotation" dur="200" direction="alternate"
-          to="0 10 -10" repeat="indefinite"></a-animation>
+          to="0 95 -10" repeat="indefinite"></a-animation>
       </a-entity>
       <a-animation
         attribute="rotation" dur="20000" direction="forward"
@@ -32,13 +31,13 @@
     <a-entity id="remote" tracked-controls="idPrefix: Daydream Controller" daydream-controls></a-entity>
   </a-scene>
   <template id="jumpAnimation">
-    <a-animation 
+    <a-animation
       attribute="position" dur="200" from="0 18 -40" to="0 0 -40" easing="linear"
       delay="1000"></a-animation>
-    <a-animation 
+    <a-animation
       attribute="position" dur="200" to="0 18 -40" easing="linear"></a-animation>
   </template>
-  <script src="t-rex.js"></script>
   <script src="index.js"></script>
+  <script>addCacti()</script>
 </body>
 </html>

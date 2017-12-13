@@ -46,25 +46,28 @@ self.addEventListener('fetch', function(event) {
         if (event.request.method === 'POST' && event.request.url.match(/spaces.archilogic.com/)) {
 
           return event.request.json().then(function(jsonRpcRequest) {
-            console.log('JSON RPC', jsonRpcRequest)
+            console.log('JSON RPC request', jsonRpcRequest)
 
             // furniture requests - let's cache them!
             if (jsonRpcRequest.method == 'Product.read') {
               var productId = jsonRpcRequest.params.resourceId
-              console.log('Product ID', productId)
 
               // check if the product is already in the IndexedDB
               return idbKeyval.get(productId).then(function (storedValue) {
-                if (storedValue) return new Response(storedValue.slice({contentType: "application/json"}), {headers: contentTypeHeader})
+                if (storedValue) {
+                  // need to update id in the response for the 3dio.js to be able to match request and response
+                  storedValue.id = jsonRpcRequest.id
+                  return new Response(new Blob([JSON.stringify(storedValue)], { contentType: "application/json" }), { headers: contentTypeHeader })
+                }
 
                 // if not, let's fetch the product and save it
                 console.log('Stored value NOT found!')
                 return fetch(fetchRequest.clone())
-                  .then(function (response) { return response.blob() })
+                  .then(function (response) { return response.json() })
                   .then(function (product) {
                     idbKeyval.set(productId, product)
                     console.log('Product stored')
-                    return new Response(product.slice({contentType: "application/json"}), {headers: contentTypeHeader})
+                    return new Response(new Blob([JSON.stringify(product)], {contentType: "application/json"}), {headers: contentTypeHeader})
                   })
               })
             } else {
@@ -72,7 +75,6 @@ self.addEventListener('fetch', function(event) {
               return fetch(fetchRequest)
             }
           })
-
        } else {
 
         return fetch(fetchRequest).then(
@@ -98,11 +100,6 @@ self.addEventListener('fetch', function(event) {
             return response;
           });
         }
-      })
-      .then(function(result) {
-       // FIXME remove log
-       console.log('RESULT ', result)
-       return result
       })
       .catch(function(err){
         console.log('Fatal error\n',err)
