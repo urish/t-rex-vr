@@ -1,3 +1,6 @@
+self.importScripts('https://unpkg.com/idb-keyval@2.3.0/dist/idb-keyval-min.js')
+
+var contentTypeHeader = new Headers({'Content-Type': 'application/json'})
 var CACHE_NAME = 't-rex-cache-v1';
 var urlsToCache = [
   // caches all files in t-rex-vr
@@ -27,7 +30,7 @@ self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request)
       .then(function(response) {
-        // Cache hit - return response
+        // Cache hit for GET requests - return response
         if (response) {
           return response;
         }
@@ -37,11 +40,46 @@ self.addEventListener('fetch', function(event) {
         // once by cache and once by the browser for fetch, we need
         // to clone the response.
         var fetchRequest = event.request.clone();
+        var cacheRequest = event.request
+
+        // Archilogic JSONRPC requests
+        if (event.request.method === 'POST' && event.request.url.match(/spaces.archilogic.com/)) {
+
+          return event.request.json().then(function(jsonRpcRequest) {
+            console.log('JSON RPC', jsonRpcRequest)
+
+            // furniture requests - let's cache them!
+            if (jsonRpcRequest.method == 'Product.read') {
+              var productId = jsonRpcRequest.params.resourceId
+              console.log('Product ID', productId)
+
+              // check if the product is already in the IndexedDB
+              return idbKeyval.get(productId).then(function (storedValue) {
+                if (storedValue) return new Response(storedValue.slice({contentType: "application/json"}), {headers: contentTypeHeader})
+
+                // if not, let's fetch the product and save it
+                console.log('Stored value NOT found!')
+                return fetch(fetchRequest.clone())
+                  .then(function (response) { return response.blob() })
+                  .then(function (product) {
+                    idbKeyval.set(productId, product)
+                    console.log('Product stored')
+                    return new Response(product.slice({contentType: "application/json"}), {headers: contentTypeHeader})
+                  })
+              })
+            } else {
+              // TODO potentially cache?
+              return fetch(fetchRequest)
+            }
+          })
+
+       } else {
 
         return fetch(fetchRequest).then(
           function(response) {
             // Check if we received a valid response
-            if(!response || response.status !== 200 || response.type !== 'basic') {
+
+            if (!response || response.status !== 200 ) {
               return response;
             }
 
@@ -53,15 +91,21 @@ self.addEventListener('fetch', function(event) {
 
             caches.open(CACHE_NAME)
               .then(function(cache) {
-                cache.put(event.request, responseToCache);
+                console.log('put:', cacheRequest.url)
+                cache.put(cacheRequest, responseToCache);
               });
 
             return response;
-          }
-        );
+          });
+        }
+      })
+      .then(function(result) {
+       // FIXME remove log
+       console.log('RESULT ', result)
+       return result
       })
       .catch(function(err){
-        console.log(err)
+        console.log('Fatal error\n',err)
       })
     );
 });
