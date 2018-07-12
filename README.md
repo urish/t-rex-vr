@@ -10,6 +10,10 @@ https://t-rex-vr.firebaseapp.com/
 
 For best experience, use a VR headset. You make the T-Rex jump by jumping (yes, in the physical world!). You can also make it jump using the spacebar (on a computer) or by pressing the trackpad of a Google Daydream Controller.
 
+## Watch it in action (video):
+
+[![Watch it in action](https://user-images.githubusercontent.com/892318/42643239-527c4318-8601-11e8-81e5-5f1ee949c3b4.png)](https://twitter.com/UriShaked/status/939871949072637952)
+
 ## TODO
 
 - [ ] Collision detection
