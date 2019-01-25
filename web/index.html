@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>T-Rex VR</title>
-    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/zcanter/aframe-gradient-sky/master/dist/gradientsky.min.js"></script>
   </head>
 <body>
@@ -28,6 +28,8 @@
 
     <a-gradient-sky material="shader: gradient; topColor: 163 233 248; bottomColor: 230 191 140;"></a-gradient-sky>
     <a-entity id="remote" tracked-controls="idPrefix: Daydream Controller" daydream-controls></a-entity>
+    <a-entity id="win-controls-right" windows-motion-controls="hand: right"></a-entity>
+    <a-entity id="win-controls-left" windows-motion-controls="hand: left"></a-entity>
   </a-scene>
   <template id="jumpAnimation">
     <a-animation 

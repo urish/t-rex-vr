@@ -1,6 +1,8 @@
 const scene = document.querySelector('#scene');
 const trex = document.querySelector('#t-rex');
 const remote = document.querySelector('#remote');
+const winControlsRight = document.querySelector('#win-controls-right');
+const winControlsLeft = document.querySelector('#win-controls-left');
 const wobbleAnimation = document.querySelector('#t-rex-wobble');
 
 const cactusKinds = 7;
@@ -73,5 +75,7 @@ window.addEventListener('devicemotion', (e) => {
 }, true);
 
 remote.addEventListener('buttondown', jump);
+winControlsRight.addEventListener('triggerdown', jump);
+winControlsLeft.addEventListener('triggerdown', jump);
 
 addCacti();
